@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+	- Application context definition for Petclinic on Hibernate.
+-->
+<beans>
+	<!-- ========================= RESOURCE DEFINITIONS ========================= -->
+
+	<!-- Configurer that replaces ${...} placeholders with values from a properties file -->
+	<!-- (in this case, JDBC-related settings for the dataSource definition below) -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location"><value>/WEB-INF/jdbc.properties</value></property>
+	</bean>
+
+	<!-- Local DataSource that works in any environment -->
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"><value>${jdbc.driverClassName}</value></property>
+		<property name="url"><value>${jdbc.url}</value></property>
+		<property name="username"><value>${jdbc.username}</value></property>
+		<property name="password"><value>${jdbc.password}</value></property>
+	</bean>
+
+	
+	<!-- Hibernate SessionFactory -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate.LocalSessionFactoryBean">
+		<property name="dataSource"><ref local="dataSource" /></property>
+		<property name="mappingResources">
+			<list>
+				<value>/org/mmxbb/bookstore/model/Adminuser.hbm.xml</value>
+				<value>/org/mmxbb/bookstore/model/Bookinfo.hbm.xml</value>
+				<value>/org/mmxbb/bookstore/model/Category.hbm.xml</value>
+				<value>/org/mmxbb/bookstore/model/Orderdetail.hbm.xml</value>
+				<value>/org/mmxbb/bookstore/model/Orderinfo.hbm.xml</value>
+				<value>/org/mmxbb/bookstore/model/User.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.jdbc.fetch_size">40</prop>
+				<prop key="hibernate.jdbc.batch_size">5</prop>
+				<prop key="hibernate.c3p0.max_size">20</prop>
+				<prop key="hibernate.c3p0.min_size">5</prop>
+				<prop key="hibernate.c3p0.timeout">200</prop>
+				<prop key="hibernate.c3p0.max_statements">100</prop>
+				<prop key="hibernate.c3p0.acquire_increment">5</prop>			
+			</props>
+		</property>
+	</bean>
+
+	<!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate.HibernateTransactionManager">
+		<property name="sessionFactory"><ref local="sessionFactory" /></property>
+	</bean>
+
+		
+	<bean id="userDao" class="org.mmxbb.bookstore.dao.hibernate.UserDaoHibernate">
+	    <property name="sessionFactory"><ref local="sessionFactory" /></property>
+	</bean>
+	
+    <bean id="categoryDao" class="org.mmxbb.bookstore.dao.hibernate.CategoryDaoHibernate">
+	    <property name="sessionFactory"><ref local="sessionFactory" /></property>
+	</bean>
+	
+    <bean id="bookinfoDao" class="org.mmxbb.bookstore.dao.hibernate.BookinfoDaoHibernate">
+	    <property name="sessionFactory"><ref local="sessionFactory" /></property>
+	</bean>
+	
+	<bean id="adminuserDao" class="org.mmxbb.bookstore.dao.hibernate.AdminuserDaoHibernate">
+	    <property name="sessionFactory"><ref local="sessionFactory" /></property>
+	</bean>
+	
+   <bean id="orderinfoDao" class="org.mmxbb.bookstore.dao.hibernate.OrderinfoDaoHibernate">
+	    <property name="sessionFactory"><ref local="sessionFactory" /></property>
+	</bean>
+	
+	<bean id="orderdetailDao" class="org.mmxbb.bookstore.dao.hibernate.OrderdetailDaoHibernate">
+	    <property name="sessionFactory"><ref local="sessionFactory" /></property>
+	</bean>
+	
+
+	<bean name="openSessionInViewInterceptor" class="org.springframework.orm.hibernate.support.OpenSessionInViewInterceptor">
+		<property name="sessionFactory"><ref bean="sessionFactory" /></property>
+	</bean>
+	
+	<bean id="hibernateInterceptor" class="org.springframework.orm.hibernate.HibernateInterceptor">
+         <property name="sessionFactory"><ref bean="sessionFactory"/></property>
+    </bean>
+    
+   
+</beans>

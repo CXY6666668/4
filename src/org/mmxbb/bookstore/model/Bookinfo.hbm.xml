@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<!-- DO NOT EDIT: This is a generated file that is synchronized -->
+<!-- by MyEclipse Hibernate tool integration.                   -->
+<!-- Created Sat Jan 21 16:06:36 CST 2006                         -->
+<hibernate-mapping package="org.mmxbb.bookstore.model">
+
+    <class name="Bookinfo" table="bookinfo">
+        <id name="id" column="id" type="java.lang.Integer">
+            <generator class="increment"/>
+        </id>
+       
+        <property name="categoryid" column="categoryid" type="java.lang.Integer"  not-null="true" />
+        <property name="name" column="name" type="java.lang.String"  not-null="true" />
+        <property name="price" column="price" type="java.lang.Float"  not-null="true" />
+        <property name="saleprice" column="saleprice" type="java.lang.Float"  not-null="true" />
+        <property name="press" column="press" type="java.lang.String"  not-null="true" />
+        <property name="author" column="author" type="java.lang.String"  not-null="true" />
+        <property name="content" column="content" type="java.lang.String"  not-null="true" />
+        <property name="descript" column="descript" type="java.lang.String"  not-null="true" />
+        <property name="regdate" column="regdate" type="java.util.Date"  not-null="true" />
+    </class>
+    
+</hibernate-mapping>

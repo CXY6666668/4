@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<!-- DO NOT EDIT: This is a generated file that is synchronized -->
+<!-- by MyEclipse Hibernate tool integration.                   -->
+<!-- Created Sat Jan 21 16:06:59 CST 2006                         -->
+<hibernate-mapping package="org.mmxbb.bookstore.model">
+
+    <class name="Adminuser" table="adminuser">
+        <id name="adminuser" column="adminuser" type="java.lang.String">
+            <generator class="native"/>
+        </id>
+ 
+        <property name="adminpass" column="adminpass" type="java.lang.String"  not-null="true" />
+    </class>
+    
+</hibernate-mapping>

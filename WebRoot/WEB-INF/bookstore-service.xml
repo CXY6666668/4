@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<!--userService  开始-->
+       
+	<bean id="userServiceTarget" class="org.mmxbb.bookstore.service.impl.UserServiceImpl">
+		<property name="userDao"><ref bean="userDao"/></property>
+		
+	</bean>
+    
+    <bean id="userServiceTranTarget" class="org.springframework.aop.framework.ProxyFactoryBean">
+         <property name="target"><ref bean="userServiceTarget"/></property>
+         <property name="proxyInterfaces">
+           <value>org.mmxbb.bookstore.service.UserService</value>
+         </property>
+         <property name="interceptorNames">
+           <list>
+              <value>hibernateInterceptor</value>
+           </list>
+         </property>
+     </bean>  
+     
+       <bean id="userService" 
+        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager"><ref bean="transactionManager"/></property>
+        <property name="target"><ref local="userServiceTranTarget"/></property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="load*">PROPAGATION_REQUIRED</prop>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="add*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>  
+    <!--userService  结束-->
+     
+    	<!--category  开始-->
+       
+	<bean id="categoryServiceTarget" class="org.mmxbb.bookstore.service.impl.CategoryServiceImpl">
+		<property name="categoryDao"><ref bean="categoryDao"/></property>
+		
+	</bean>
+    
+    <bean id="categoryServiceTranTarget" class="org.springframework.aop.framework.ProxyFactoryBean">
+         <property name="target"><ref bean="categoryServiceTarget"/></property>
+         <property name="proxyInterfaces">
+           <value>org.mmxbb.bookstore.service.CategoryService</value>
+         </property>
+         <property name="interceptorNames">
+           <list>
+              <value>hibernateInterceptor</value>
+           </list>
+         </property>
+     </bean>  
+     
+       <bean id="categoryService" 
+        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager"><ref bean="transactionManager"/></property>
+        <property name="target"><ref local="categoryServiceTranTarget"/></property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="load*">PROPAGATION_REQUIRED</prop>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="add*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>  
+ <!--category 结束 -->
+ 
+    <!--bookinfo  开始-->
+    
+    	<bean id="bookinfoServiceTarget" class="org.mmxbb.bookstore.service.impl.BookinfoServiceImpl">
+		<property name="bookinfoDao"><ref bean="bookinfoDao"/></property>
+		
+	</bean>
+    
+     <bean id="bookinfoServiceTranTarget" class="org.springframework.aop.framework.ProxyFactoryBean">
+         <property name="target"><ref bean="bookinfoServiceTarget"/></property>
+         <property name="proxyInterfaces">
+           <value>org.mmxbb.bookstore.service.BookinfoService</value>
+         </property>
+         <property name="interceptorNames">
+           <list>
+              <value>hibernateInterceptor</value>
+           </list>
+         </property>
+     </bean>  
+     
+       <bean id="bookinfoService" 
+        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager"><ref bean="transactionManager"/></property>
+        <property name="target"><ref local="bookinfoServiceTranTarget"/></property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="load*">PROPAGATION_REQUIRED</prop>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="add*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>  
+    <!--bookinfo  结束-->
+    
+     
+    <!--orderinfo 开始-->
+    
+    	<bean id="orderinfoServiceTarget" class="org.mmxbb.bookstore.service.impl.OrderinfoServiceImpl">
+		<property name="orderinfoDao"><ref bean="orderinfoDao"/></property>
+		
+	</bean>
+    
+     <bean id="orderinfoServiceTranTarget" class="org.springframework.aop.framework.ProxyFactoryBean">
+         <property name="target"><ref bean="orderinfoServiceTarget"/></property>
+         <property name="proxyInterfaces">
+           <value>org.mmxbb.bookstore.service.OrderinfoService</value>
+         </property>
+         <property name="interceptorNames">
+           <list>
+              <value>hibernateInterceptor</value>
+           </list>
+         </property>
+     </bean>  
+     
+       <bean id="orderinfoService" 
+        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager"><ref bean="transactionManager"/></property>
+        <property name="target"><ref local="orderinfoServiceTranTarget"/></property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="load*">PROPAGATION_REQUIRED</prop>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="add*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>  
+    <!--book  结束-->
+    
+    <!--orderdetail 开始-->
+    
+    	<bean id="orderdetailServiceTarget" class="org.mmxbb.bookstore.service.impl.OrderdetailServiceImpl">
+		<property name="orderdetailDao"><ref bean="orderdetailDao"/></property>
+		
+	</bean>
+    
+     <bean id="orderdetailServiceTranTarget" class="org.springframework.aop.framework.ProxyFactoryBean">
+         <property name="target"><ref bean="orderdetailServiceTarget"/></property>
+         <property name="proxyInterfaces">
+           <value>org.mmxbb.bookstore.service.OrderdetailService</value>
+         </property>
+         <property name="interceptorNames">
+           <list>
+              <value>hibernateInterceptor</value>
+           </list>
+         </property>
+     </bean>  
+     
+       <bean id="orderdetailService" 
+        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager"><ref bean="transactionManager"/></property>
+        <property name="target"><ref local="orderdetailServiceTranTarget"/></property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="load*">PROPAGATION_REQUIRED</prop>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="add*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>  
+    <!--orderdetail  结束-->
+    
+    <!--adminuserService  开始-->
+       
+	<bean id="adminuserServiceTarget" class="org.mmxbb.bookstore.service.impl.AdminuserServiceImpl">
+		<property name="adminuserDao"><ref bean="adminuserDao"/></property>
+		
+	</bean>
+    
+    <bean id="adminuserServiceTranTarget" class="org.springframework.aop.framework.ProxyFactoryBean">
+         <property name="target"><ref bean="adminuserServiceTarget"/></property>
+         <property name="proxyInterfaces">
+           <value>org.mmxbb.bookstore.service.AdminuserService</value>
+         </property>
+         <property name="interceptorNames">
+           <list>
+              <value>hibernateInterceptor</value>
+           </list>
+         </property>
+     </bean>  
+     
+       <bean id="adminuserService" 
+        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager"><ref bean="transactionManager"/></property>
+        <property name="target"><ref local="adminuserServiceTranTarget"/></property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="load*">PROPAGATION_REQUIRED</prop>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="add*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>  
+    <!--adminuserService  结束-->
+   
+        
+</beans>

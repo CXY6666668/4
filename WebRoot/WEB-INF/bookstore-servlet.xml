@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"   "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  	 <bean id="bookstoreController" class="org.mmxbb.bookstore.mvc.BookStoreController">
+		<property name="methodNameResolver"><ref bean="bookstoreMethodNameResolver" /></property>
+	 </bean>
+  	<bean id="bookstoreMethodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+		    <prop key="/regSuccess.do">regSuccessHandler</prop>
+		     <prop key="/index.do">indexHandler</prop>
+		     <prop key="/webleft.do">webleftHandler</prop>
+		     <prop key="/search.do">searchHandler</prop>
+		     <prop key="/webhead.do">webheadHandler</prop>
+		     <prop key="/bottom.do">bottomHandler</prop>
+		     <prop key="/logout.do">logoutHandler</prop>
+		      <prop key="/showCart.do">showCartHandler</prop>
+		        <prop key="/adminhead.do">adminheadHandler</prop>
+			  <prop key="/adminright.do">adminrightHandler</prop>
+			    <prop key="/adminleft.do">adminleftHandler</prop>
+			    <prop key="/adminindex.do">adminindexHandler</prop>
+			
+			</props>
+		</property>
+	</bean>
+	
+       <bean id="orderinfoController" class="org.mmxbb.bookstore.mvc.order.OrderinfoController">
+		<property name="methodNameResolver"><ref bean="orderinfoMethodNameResolver" /></property>
+	   <property name="orderinfoService"><ref bean="orderinfoService" /></property>
+	     <property name="orderdetailService"><ref bean="orderdetailService" /></property>
+	 </bean>
+  	<bean id="orderinfoMethodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+		    <prop key="/myOrder.do">myOrderHandler</prop>
+		     <prop key="/orderList.do">orderListHandler</prop>
+		     <prop key="/detailOrder.do">detailOrderHandler</prop>
+		     <prop key="/updateOrder.do">updateOrderHandler</prop>
+		 
+			
+			</props>
+		</property>
+	</bean>
+	
+
+
+		
+	 <bean id="userController" class="org.mmxbb.bookstore.mvc.user.UserController">
+		<property name="methodNameResolver"><ref bean="userMethodNameResolver" /></property>
+	    <property name="userService"><ref bean="userService" /></property>
+	 </bean>	
+	<bean id="userMethodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+		    <prop key="/userList.do">userListHandler</prop>
+			</props>
+		</property>
+	</bean>
+	
+	 <bean id="categoryController" class="org.mmxbb.bookstore.mvc.cate.CategoryController">
+		<property name="methodNameResolver"><ref bean="categoryMethodNameResolver" /></property>
+	    <property name="categoryService"><ref bean="categoryService" /></property>
+	 </bean>	
+	<bean id="categoryMethodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+		    <prop key="/categoryList.do">cateListHandler</prop>
+			<prop key="/delCate.do">delCateHandler</prop>
+			<prop key="/showUpdateCate.do">showUpdateCateHandler</prop>
+			</props>
+		</property>
+	</bean>
+	
+	
+		 <bean id="bookinfoController" class="org.mmxbb.bookstore.mvc.book.BookinfoController">
+		<property name="methodNameResolver"><ref bean="bookinfoMethodNameResolver" /></property>
+	    <property name="bookinfoService"><ref bean="bookinfoService" /></property>
+	    <property name="categoryService"><ref bean="categoryService" /></property>
+	 
+	 </bean>	
+	<bean id="bookinfoMethodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+		 	
+			    <prop key="/showAddBook.do">showAddBookinfoHandler</prop>
+			    <prop key="/bookList.do">bookListHandler</prop>
+			    <prop key="/delBook.do">delBookHandler</prop>
+			    <prop key="/showUpdateBook.do">showUpdateBookinfoHandler</prop>
+			    <prop key="/detailBook.do">detailBookinfoHandler</prop>
+			    <prop key="/cateBook.do">cateBookListHandler</prop>
+			      <prop key="/latestbook.do">latestbookHandler</prop>
+			      <prop key="/buyBook.do">buyBookHandler</prop>
+			     <prop key="/delShopCart.do">delShopCartHandler</prop>
+			</props>
+		</property>
+	</bean>
+	
+	
+	<bean id="addUserFormController" class="org.mmxbb.bookstore.mvc.user.AddUserFormController">
+		<property name="commandName"><value>regForm</value></property>
+		<property name="commandClass"><value>org.mmxbb.bookstore.model.User</value></property>
+		<property name="formView"><value>web/user/reg</value></property>
+		<property name="successView"><value>web/user/regSuccess</value></property>
+		<property name="userService"><ref bean="userService" /></property>
+	</bean>
+
+    <bean id="loginUserFormController" class="org.mmxbb.bookstore.mvc.user.LoginUserFormController">
+		<property name="commandName"><value>loginForm</value></property>
+		<property name="commandClass"><value>org.mmxbb.bookstore.model.User</value></property>
+		<property name="formView"><value>web/user/login</value></property>
+		<property name="successView"><value>web/left</value></property>
+		<property name="userService"><ref bean="userService" /></property>
+	</bean>
+	
+	<bean id="loginAdminuserFormController" class="org.mmxbb.bookstore.mvc.admin.LoginAdminuserFormController">
+		<property name="commandName"><value>adminloginForm</value></property>
+		<property name="commandClass"><value>org.mmxbb.bookstore.model.Adminuser</value></property>
+		<property name="formView"><value>admin/adminLogin</value></property>
+		<property name="successView"><value>admin/main</value></property>
+		<property name="adminuserService"><ref bean="adminuserService" /></property>
+	</bean>
+	
+	<bean id="addCategoryFormController" class="org.mmxbb.bookstore.mvc.cate.AddCategoryFormController">
+		<property name="commandName"><value>categoryForm</value></property>
+		<property name="commandClass"><value>org.mmxbb.bookstore.model.Category</value></property>
+		<property name="successView"><value>/bookStore/categoryList.do</value></property>
+		<property name="categoryService"><ref bean="categoryService" /></property>
+	</bean>
+     
+     <bean id="updateCategoryFormController" class="org.mmxbb.bookstore.mvc.cate.UpdateCategoryFormController">
+		<property name="commandName"><value>cateUpdateForm</value></property>
+		<property name="commandClass"><value>org.mmxbb.bookstore.model.Category</value></property>
+		<property name="successView"><value>/bookStore/categoryList.do</value></property>
+		<property name="categoryService"><ref bean="categoryService" /></property>
+	</bean>
+	
+	<bean id="addBookinfoFormController" class="org.mmxbb.bookstore.mvc.book.AddBookinfoFormController">
+		<property name="commandName"><value>addBookForm</value></property>
+		<property name="commandClass"><value>org.mmxbb.bookstore.model.Bookinfo</value></property>
+		<property name="successView"><value>cateBook.do</value></property>
+		<property name="bookinfoService"><ref bean="bookinfoService" /></property>
+	
+	</bean>
+	
+	<bean id="searchBookinfoFormController" class="org.mmxbb.bookstore.mvc.book.SearchBookinfoFormController">
+		<property name="commandName"><value>searchBookForm</value></property>
+		<property name="commandClass"><value>org.mmxbb.bookstore.model.Bookinfo</value></property>
+			<property name="formView"><value>web/search/searchResult</value></property>
+		<property name="successView"><value>web/search/searchResult</value></property>
+		<property name="bookinfoService"><ref bean="bookinfoService" /></property>
+	
+	</bean>
+     
+     <bean id="updateBookinfoFormController" class="org.mmxbb.bookstore.mvc.book.UpdateBookinfoFormController">
+		<property name="commandName"><value>updateBookForm</value></property>
+		<property name="commandClass"><value>org.mmxbb.bookstore.model.Bookinfo</value></property>
+		<property name="successView"><value>cateBook.do</value></property>
+		<property name="bookinfoService"><ref bean="bookinfoService" /></property>
+	</bean>
+	
+	<bean id="addOrderFormController" class="org.mmxbb.bookstore.mvc.order.AddOrderinfoFormController">
+		<property name="commandName"><value>addOrderForm</value></property>
+		<property name="commandClass"><value>org.mmxbb.bookstore.model.Orderinfo</value></property>
+		<property name="formView"><value>web/order/shopCart</value></property>
+		<property name="successView"><value>web/order/addOrderSuccess</value></property>
+		<property name="orderinfoService"><ref bean="orderinfoService" /></property>
+	    <property name="orderdetailService"><ref bean="orderdetailService" /></property>
+	</bean>
+	
+     
+	<bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="openSessionInViewInterceptor" />
+			</list>
+		</property>
+		<property name="mappings">
+			<props>
+				<prop key="/reg.do">addUserFormController</prop>
+			    <prop key="/login.do">loginUserFormController</prop>
+			    <prop key="/regSuccess.do">bookstoreController</prop>
+			    <prop key="/loginSuccess.do">bookstoreController</prop>
+			    <prop key="/regFailed.do">bookstoreController</prop>
+			    <prop key="/loginFailed.do">bookstoreController</prop>
+			    <prop key="/userList.do">userController</prop>
+			    <prop key="/addCategory.do">addCategoryFormController</prop>
+			    <prop key="/categoryList.do">categoryController</prop>
+			    <prop key="/delCate.do">categoryController</prop>
+			    <prop key="/showUpdateCate.do">categoryController</prop>
+			    <prop key="/updateCategory.do">updateCategoryFormController</prop>
+			    <prop key="/showAddBook.do">bookinfoController</prop>
+			    <prop key="/addBook.do">addBookinfoFormController</prop>
+			    <prop key="/bookList.do">bookinfoController</prop>
+			    <prop key="/delBook.do">bookinfoController</prop>
+			    <prop key="/showUpdateBook.do">bookinfoController</prop>
+			    <prop key="/detailBook.do">bookinfoController</prop>
+			    <prop key="/updateBook.do">updateBookinfoFormController</prop>
+			     <prop key="/cateBook.do">bookinfoController</prop>
+			    <prop key="/index.do">bookstoreController</prop>
+			    <prop key="/webleft.do">bookstoreController</prop>
+			    <prop key="/webhead.do">bookstoreController</prop>
+			    <prop key="/search.do">bookstoreController</prop>
+			    <prop key="/searchResult.do">searchBookinfoFormController</prop>
+			    <prop key="/bottom.do">bookstoreController</prop>
+			    <prop key="/latestbook.do">bookinfoController</prop>
+			  <prop key="/logout.do">bookstoreController</prop>
+			  <prop key="/buyBook.do">bookinfoController</prop>
+			  	  <prop key="/delShopCart.do">bookinfoController</prop>
+			  <prop key="/showCart.do">bookstoreController</prop>
+			   <prop key="/addOrder.do">addOrderFormController</prop>
+			    <prop key="/adminleft.do">bookstoreController</prop>
+			 <prop key="/adminright.do">bookstoreController</prop>
+			 <prop key="/adminhead.do">bookstoreController</prop>
+			   <prop key="/adminindex.do">bookstoreController</prop>
+			 <prop key="/adminlogin.do">loginAdminuserFormController</prop>
+			 <prop key="/myOrder.do">orderinfoController</prop>
+			 <prop key="/orderList.do">orderinfoController</prop>
+			  <prop key="/detailOrder.do">orderinfoController</prop>
+			   <prop key="/updateOrder.do">orderinfoController</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="requestContextAttribute"><value>rc</value></property>
+		<property name="viewClass"><value>org.springframework.web.servlet.view.JstlView</value></property>
+		<property name="prefix"><value>/WEB-INF/view/</value></property>
+		<property name="suffix"><value>.jsp</value></property>
+		<property name="contentType"><value>text/html;charset=GB2312</value></property>
+	</bean>
+</beans>
